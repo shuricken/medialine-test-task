@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  test-app:
+  php:
     image: yiisoftware/yii2-php:7.4-apache
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
