@@ -51,8 +51,10 @@ $config = [
             'enableStrictParsing'=>true,
             'showScriptName' => false,
             'rules' => [
-                '/api/v1/link/create' => 'api/link/create',
-                '/api/v1/link/<hash>' => 'api/link/get-by-hash',
+                '/api/v1/link/create' => 'api/v1/link/create',
+                '/api/v1/link/<hash>' => 'api/v1/link/get-by-hash',
+                '/'=>'site/index',
+                '/<hash>' => 'site/redirect',
             ],
         ],
     ],
