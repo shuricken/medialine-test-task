@@ -29,7 +29,7 @@ class Link extends \yii\db\ActiveRecord
     {
         return [
             [['url'], 'required'],
-            [['url'], 'string'],
+            [['url'], 'url', 'defaultScheme' => 'http'],
             [['visits'], 'integer'],
             [['hash'], 'string', 'max' => 6],
             [['hash'], 'unique'],
@@ -47,25 +47,6 @@ class Link extends \yii\db\ActiveRecord
             'hash' => 'Hash',
             'visits' => 'Visits',
         ];
-    }
-
-    public function makeHash()
-    {
-        do{
-            $dirtyHash=Yii::$app->security->generateRandomString(6);
-        } while (Link::find()->where(['hash'=>$dirtyHash])->count()!=0);
-        $this->hash=$dirtyHash;
-    }
-
-    public function beforeSave($insert)
-    {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-        if (empty($this->hash)){
-            $this->makeHash();
-        }
-        return true;
     }
 
 }
