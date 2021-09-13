@@ -17,13 +17,18 @@ class Link extends \app\models\Link
 {
     private $_shortlink;
 
+    const SCENARIO_CREATE = 'default';
+    const SCENARIO_GETBYHASH = 'get-by-hash';
+
     public function fields()
     {
-        $fields=parent::fields();
-        if (Yii::$app->controller->action->id == 'create')
-        { $fields=['shortlink'];}
-        if (Yii::$app->controller->action->id == 'get-by-hash')
-        { $fields=['url','visits']; }
+        $fields = parent::fields();
+        if ($this->scenario === self::SCENARIO_CREATE) {
+            $fields = ['shortlink'];
+        }
+        if ($this->scenario === self::SCENARIO_GETBYHASH) {
+            $fields = ['url','visits'];
+        }
         return $fields;
     }
 

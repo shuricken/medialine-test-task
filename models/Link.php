@@ -30,9 +30,6 @@ class Link extends \yii\db\ActiveRecord
         return [
             [['url'], 'required'],
             [['url'], 'url', 'defaultScheme' => 'http'],
-            [['visits'], 'integer'],
-            [['hash'], 'string', 'max' => 6],
-            [['hash'], 'unique'],
         ];
     }
 

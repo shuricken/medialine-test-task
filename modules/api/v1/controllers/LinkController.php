@@ -13,13 +13,6 @@ class LinkController extends ActiveController
 {
     public $modelClass = 'app\modules\api\v1\models\Link';
 
-    public function actions()
-    {
-        $actions = parent::actions();
-        unset($actions['index'],$actions['view'],$actions['update'],$actions['delete']);
-        return $actions;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -35,12 +28,16 @@ class LinkController extends ActiveController
         return $behaviors;
     }
 
-
     public function actionGetByHash($hash)
     {
-        return Link::find()
+        $link=Link::find()
             ->where(['hash'=>$hash])
             ->one();
+        if (!$link) {
+            throw new \yii\web\NotFoundHttpException('Hash ' . $hash . ' not found');
+        }
+        $link->scenario = Link::SCENARIO_GETBYHASH;
+        return $link;
     }
 
 
